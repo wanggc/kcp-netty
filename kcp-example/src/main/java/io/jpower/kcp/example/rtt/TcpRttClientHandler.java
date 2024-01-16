@@ -1,5 +1,6 @@
 package io.jpower.kcp.example.rtt;
 
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -93,6 +94,11 @@ public class TcpRttClientHandler extends ChannelInboundHandlerAdapter {
             sum += rtt;
         }
         log.info("average: {}", (sum / rtts.length));
+        Arrays.sort(rtts);
+        log.info(".99: {}", rtts[(int) (rtts.length * 0.99)]);
+        log.info(".95: {}", rtts[(int) (rtts.length * 0.95)]);
+        log.info(".75: {}", rtts[(int) (rtts.length * 0.75)]);
+        log.info(".50: {}", rtts[(int) (rtts.length * 0.50)]);
     }
 
     @Override
