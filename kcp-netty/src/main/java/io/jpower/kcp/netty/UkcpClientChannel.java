@@ -54,7 +54,6 @@ public final class UkcpClientChannel extends AbstractChannel implements UkcpChan
         this.udpChannel = new UkcpClientUdpChannel(this);
         this.ukcp = createUkcp();
         this.config = new DefaultUkcpClientChannelConfig(this, ukcp, udpChannel.javaChannel().socket());
-        this.config.setNodelay(true).setInterval(10).setFastResend(2).setNocwnd(true);
     }
 
     private Ukcp createUkcp() {
