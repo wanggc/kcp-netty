@@ -18,7 +18,7 @@ public class TcpRttDecoder extends ByteToMessageDecoder {
         }
 
         short dataLen = in.getShort(in.readerIndex() + 6);
-        if (in.readableBytes() < dataLen) {
+        if (in.readableBytes() < dataLen+8) {
             return;
         }
 
