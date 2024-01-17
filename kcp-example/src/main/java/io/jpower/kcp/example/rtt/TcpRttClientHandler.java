@@ -10,6 +10,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,7 +100,8 @@ public class TcpRttClientHandler extends ChannelInboundHandlerAdapter {
         log.info(".95: {}", rtts[(int) (rtts.length * 0.95)]);
         log.info(".75: {}", rtts[(int) (rtts.length * 0.75)]);
         log.info(".50: {}", rtts[(int) (rtts.length * 0.50)]);
-    }
+        double stddev = new StandardDeviation().evaluate(Arrays.stream(rtts).mapToDouble(i -> i).toArray());
+        log.info("stddev: {}", stddev);    }
 
     @Override
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
